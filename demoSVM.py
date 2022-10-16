@@ -9,7 +9,7 @@ def rmse(actual, pred):
     return np.sqrt(np.square(np.subtract(actual, pred)).mean())
 
 def main():
-    df = pd.read_excel("桃園大樓.xlsx")
+    df = pd.read_excel("高雄大樓.xlsx")
     data = df.drop(['地段位置或門牌', '總價(萬元)', '型態'], axis=1)
     n = len(data)*4//5
     
@@ -17,7 +17,7 @@ def main():
     trainY = df['總價(萬元)'][:n].values.tolist()
     testX = data[n:]
     
-    param = {'C': 9786, 'gamma': 0.00013420323222871787, 'epsilon': 0.24590924795429966}
+    param = {'C': 6374, 'gamma': 0.0016285719572013196, 'epsilon': 0.09808762344218226}
     regr = svm.SVR(**param)
     regr.fit(trainX, trainY)
     predY = regr.predict(testX)
