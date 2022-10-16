@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri May 20 22:27:27 2022
-
-@author: User
-"""
-
 import numpy as np
 import pandas as pd
 from sklearn import svm
