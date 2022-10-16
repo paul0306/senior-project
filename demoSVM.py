@@ -1,7 +1,6 @@
 import numpy as np
 import pandas as pd
 from sklearn import svm
-import matplotlib.pyplot as plt
 
 def mape(actual, pred):
     return np.mean(np.abs((actual - pred) / actual)) * 100
