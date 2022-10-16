@@ -9,7 +9,7 @@ def rmse(actual, pred):
     return np.sqrt(np.square(np.subtract(actual, pred)).mean())
 
 def main():
-    df = pd.read_csv("高雄大樓.csv")
+    df = pd.read_excel("高雄大樓.xlsx")
     data = df.drop(['地段位置或門牌', '總價(萬元)', '型態'], axis=1)
     n = len(data)*4//5
     
