@@ -1,13 +1,5 @@
-# -*- coding: utf-8 -*-
-"""
-Spyder Editor
-
-This is a temporary script file.
-"""
-
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 from xgboost import XGBRegressor
 
 def mape(actual, pred):
@@ -36,19 +28,6 @@ def main():
     
     print(mape(actualY, predY))
     print(rmse(actualY, predY))
-    
-    # plt.rcParams['font.sans-serif'] = ['mingliu']
-    # plt.rcParams['axes.unicode_minus'] = False
-    # plt.plot(actualY, label="actual")
-    # plt.plot(predY, label="pred")
-    # plt.title("XGBoost模型(宜蘭透天)")
-    # plt.xlabel("資料數")
-    # plt.ylabel("總價")
-    # plt.legend()
-    # plt.show()
-    
-    # df = pd.DataFrame(coef)
-    # df.to_excel("桃園透天相關係數(XGBoost).xlsx")
     
 if __name__ == '__main__':
     main()
