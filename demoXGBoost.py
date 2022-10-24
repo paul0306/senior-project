@@ -2,32 +2,30 @@ import numpy as np
 import pandas as pd
 from xgboost import XGBRegressor
 
-def mape(actual, pred):
-    return np.mean(np.abs((actual - pred) / actual)) * 100
-
-def rmse(actual, pred):
-    return np.sqrt(np.square(np.subtract(actual, pred)).mean())
-
-def main():
-    df = pd.read_excel("高雄透天.xlsx")
+def pred(country, houseType, factor):
+    fileName = country + houseType
+    df = pd.read_excel("./houseData/" + fileName + ".xlsx")
     data = df.drop(['地段位置或門牌', '總價(萬元)', '型態'], axis=1)
     n = len(data)*4//5
     
     trainX = data[:n].values
     trainY = df['總價(萬元)'][:n].values
-    testX = data[n:]
-    
-    # eta=0.01~0.2, min_child_weight, max_depth=3~10, gamma, subsample=0.5~1, colsample_bytree=0.5~1
-    #     0.3              1                6            0         1                1
-    # best=  0.03          5                6            0        0.5               1
-    param = {'eta': 0.09360304301568259, 'min_child_weight': 2, 'max_depth': 3, 'gamma': 0.13511543286134453, 'subsample': 0.704747049179695, 'colsample_bytree': 0.600925805441046}
+
+    if (fileName == '雙北大樓'):
+        param = {'eta': 0.09878995029050915, 'min_child_weight': 1, 'max_depth': 9, 'gamma': 0.9186071192341262, 'subsample': 0.6221400736407773, 'colsample_bytree': 0.9881327614723773}
+    elif (fileName == '雙北透天'):
+        param = {'eta': 0.1379454043904626, 'min_child_weight': 10, 'max_depth': 3, 'gamma': 0.7393243825876435, 'subsample': 0.7139961932572817, 'colsample_bytree': 0.9920808431727819}
+    elif (fileName == '桃園大樓'):
+        param = {'eta': 0.19183959966868047, 'min_child_weight': 3, 'max_depth': 4, 'gamma': 0.9402315352185174, 'subsample': 0.9995472921483681, 'colsample_bytree': 0.7104007674222794}
+    elif (fileName == '台中大樓'):
+        param = {'eta': 0.046399351096729095, 'min_child_weight': 2, 'max_depth': 9, 'gamma': 0.7799707114061424, 'subsample': 0.771152860221269, 'colsample_bytree': 0.8336224633799082}
+    elif (fileName == '台中透天'):
+        param = {'eta': 0.15345445163479923, 'min_child_weight': 1, 'max_depth': 3, 'gamma': 0.6994427366672115, 'subsample': 0.7048669936705431, 'colsample_bytree': 0.5563918515982558}
+    else:
+        param = {'eta': 0.09360304301568259, 'min_child_weight': 2, 'max_depth': 3, 'gamma': 0.13511543286134453, 'subsample': 0.704747049179695, 'colsample_bytree': 0.600925805441046}
+
     xgbrModel = XGBRegressor(**param)
     xgbrModel.fit(trainX,trainY)
-    predY = xgbrModel.predict(testX)
-    actualY = df['總價(萬元)'][n:].values
-    
-    print(mape(actualY, predY))
-    print(rmse(actualY, predY))
-    
-if __name__ == '__main__':
-    main()
+    predY = xgbrModel.predict(factor)
+
+    return predY
