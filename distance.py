@@ -13,9 +13,9 @@ def findDist(latA, longA, country):
                  '工業區','汙水處理廠','垃圾場','發電廠','墓地','殯儀館','機場','高速/快速公路','高鐵']
     otherExternal = ['公園','火車站','美術館','音樂廳','國民運動中心','捷運','博物館','醫院','圖書館','賣場','國小','國中','轉運站',
                     '工業區','汙水處理廠','垃圾場','發電廠','墓地','殯儀館','機場','高速/快速公路','高鐵']
-    if (country == '台南'):
+    if (country == 'tnn'):
         model = tnExternal
-    elif (country == '台中'):
+    elif (country == 'txg'):
         model = tcExternal
     else :
         model = otherExternal
