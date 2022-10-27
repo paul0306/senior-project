@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import distance as d
 import demoSVR as s
 import demoXGBoost as x
