@@ -5,7 +5,7 @@ from xgboost import XGBRegressor
 
 def pred(country, houseType, factor):
     fileName = country + houseType
-    df = pd.read_excel("./houseData/" + fileName + ".xlsx")
+    df = pd.read_excel("/var/www/html/houseData/" + fileName + ".xlsx")
     data = df.drop(['地段位置或門牌', '總價(萬元)', '型態'], axis=1)
     n = len(data)*4//5
     
